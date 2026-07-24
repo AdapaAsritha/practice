@@ -1,28 +1,27 @@
-name: Workflow Dispatch Demo 
+name: Create Trigger Workflow 
  
 on: 
-  workflow_dispatch: 
+  create: 
  
 jobs: 
-  run-node-app: 
+  create-job: 
     runs-on: ubuntu-latest 
  
     steps: 
-      - name: Checkout Repository 
-        uses: actions/checkout@v4 
+      - name: Show Event 
+        run: echo "Action = Branch or Tag Created" 
  
-      - name: Setup Node.js 
-        uses: actions/setup-node@v4 
-        with: 
-          node-version: 20 
+      - name: Show Ref Type 
+        run: echo "Type = ${{ github.event.ref_type }}" 
  
-      - name: Install Dependencies 
-        run: npm install 
+      - name: Show Ref Name 
+        run: echo "Name = ${{ github.event.ref }}" 
  
-      - name: Start Application 
-        run: | 
-          node index.js & 
-          sleep 5 
+      - name: Show Repository 
+        run: echo "Repository = ${{ github.repository }}" 
  
-      - name: Test Application 
-        run: curl http://localhost:3000
+      - name: Show User 
+        run: echo "Created By = ${{ github.actor }}" 
+ 
+      - name: Success 
+        run: echo "Create Trigger Executed Successfully!"
